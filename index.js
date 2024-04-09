@@ -6,9 +6,11 @@ canvas.height = 576
 
 var jump = 0;
 
+let dashCooldown = 0;
+
 const scaledcanvas = {
-    width: canvas.width / 4,
-    height: canvas.height / 4
+    width: canvas.width / 3,
+    height: canvas.height / 3
 }
 
 const floorCollisions2d = []
@@ -20,7 +22,7 @@ const CollisionsBlocks = []
 floorCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 202) {
-            console.log('draw a block')
+            //console.log('draw a block')
             CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -49,24 +51,71 @@ platformCollisions2d.forEach((row, y) => {
                         x: x * 16,
                         y: y * 16,
                     },
+                    height: 8,
                 })
             )
         }
     })
 })
 
-console.log(platformCollisions2d)
+//console.log(floorCollisions2d)
 
 
-const gravity = 0.3 ;
+const gravity = 0.325 ;
 
 
 const player = new Player({
     position: {
-    x: 100,
+    x: 180,
     y: 0,
     },
     CollisionsBlocks,
+    platformCollisionsBlocks,
+    imageSrc: 'img/pc/idle.png',
+    framerate: 8,
+    animations: {
+        idle:{
+        imageSrc: 'img/pc/idle.png',
+        framerate: 8,
+        framebuffer: 8
+        },
+        run:{
+            imageSrc: 'img/pc/run.png',
+            framerate: 8,
+            framebuffer: 6
+            },
+        jump:{
+            imageSrc: 'img/pc/jump.png',
+            framerate: 2,
+            framebuffer: 4
+            },
+        fall:{
+            imageSrc: 'img/pc/fall.png',
+            framerate: 2,
+            framebuffer: 4
+            },
+        fallLeft:{
+            imageSrc: 'img/pc/fallLeft.png',
+            framerate: 2,
+            framebuffer: 4
+            },
+        idleLeft:{
+            imageSrc: 'img/pc/idleLeft.png',
+            framerate: 8,
+            framebuffer: 6
+            },
+        runLeft:{
+            imageSrc: 'img/pc/runLeft.png',
+            framerate: 8,
+            framebuffer: 6
+            },
+        jumpLeft:{
+            imageSrc: 'img/pc/jumpLeft.png',
+            framerate: 2,
+            framebuffer: 4
+                },
+                
+    }
 });
 
  const keys = {
@@ -74,6 +123,9 @@ const player = new Player({
     pressed: false,
    }, 
    a: {
+    pressed: false,
+   },
+   Shift: {
     pressed: false,
    }
  }
@@ -104,8 +156,32 @@ function animate(){
     player.update()
 
     player.velocity.x = 0
-    if (keys.d.pressed) player.velocity.x = 5
-        else if (keys.a.pressed) player.velocity.x = -5
+    if (keys.d.pressed) {
+        player.switchSprite('run')
+        player.velocity.x = 3
+        player.lastDiraction = 'right'
+        player.shouldPanCamraToTheLeft
+    }
+        else if (keys.a.pressed) {
+            player.switchSprite('runLeft')
+            player.velocity.x = -3
+            player. lastDiraction = 'left'
+        }
+    else if (player.velocity.y === 0){
+
+        if (player.lastDiraction === 'right')player.switchSprite('idle')
+            else player.switchSprite('idleLeft')
+    }
+
+    if (player.velocity.y < 0) {
+        if(player.lastDiraction === 'right') player.switchSprite('jump')
+            else player.switchSprite('jumpLeft')
+    }
+        else if (player.velocity.y > 0) {
+            if(player.lastDiraction === 'right') player.switchSprite('fall')
+            else player.switchSprite('fallLeft')        
+        }
+            
 
     c.restore()
 
@@ -128,11 +204,17 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'w':
             if(jump <= 1){
-            player.velocity.y = -5;
+            player.velocity.y = -8;
             jump ++;
             }
         break
     }
+    switch (event.key) {
+        case ' ':
+            console.log('attack')
+        break
+    }
+    
 })
 
 window.addEventListener('keyup', (event) => {
@@ -147,3 +229,5 @@ window.addEventListener('keyup', (event) => {
         break
     }
 })
+
+
