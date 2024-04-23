@@ -7,7 +7,23 @@
     <title>Document</title>
 </head>
 <body>
+    <div>
     <canvas></canvas>
+    <div id="timer">
+        <p id="minutes">00</p>
+        <p id="colon">:</p>
+        <p id="seconds">00</p>
+    </div>
+    <span>
+        <p id="death">death: 0</p>
+    </span>
+    <div id="respawn"> 
+        <h2>you died wanna respawn?</h2>
+        <button id="yes" onclick="respawn()">yes</button>
+        <button id="no" onclick="window.close();">no</button>
+    </div>
+    </div>   
+
 </body>
 <script src="./js/util.js"></script>
 <script src="./js/classes/collisionblock.js"></script>

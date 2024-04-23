@@ -14,6 +14,7 @@ class Sprite {
         this.currentframe = 0
         this.framebuffer = framebuffer
         this.elapsedframes = 0
+        
     }
 
     draw(){

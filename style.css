@@ -1,3 +1,74 @@
 body{
     background-color: black;
+    text-align: center;
+    position: relative;
+}
+#respawn{
+    border-style: solid;
+    display: none;
+    background-color: gray;
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 200px;
+    text-align: center;
+}
+h2{
+    margin-left: auto;
+    margin-right: auto;
+    color: red;
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+
+}
+#yes{
+    height: 20px;
+    position: absolute;
+    margin-right: 140px;
+    margin-left: 35%;
+    background-color: green;
+    display: block;
+    margin-top: 20%;
+}
+#no{
+    position: absolute;
+    height: 20px;
+    margin-top: 20%;
+    margin-left: 50%;
+    background-color: red;
+}
+#timer{
+    display: inline;
+    position: absolute;
+    left: 950px;
+    right: 0;
+    bottom: 0;
+    top: 9px;
+}
+#seconds {
+    display: inline;}
+  
+  #minutes {
+    display: inline;
+  }
+  #colon {
+    display: inline;
+  }
+  #death{
+    display: inline;
+    position: absolute;
+    left: 0;
+    right: 950px;
+    bottom: 0;
+    top: -5px;
+}
+p{
+    color:white;
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+
 }
