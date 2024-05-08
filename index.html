@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="img/Logo.ico" type="image/ico" size="32x32">
     <title>Wizard's Peak: Spellbound Ascent</title>
 </head>
 <body>
-    <div>
+  <div style="position: absolute;">
+    <div style="float: left; z-index: 5; display: none;">
+        <button id="getcheckpoint1">CP1</button><br>
+        <button id="getcheckpoint2">CP2</button><br>
+        <button id="getcheckpoint3">CP3</button><br>
+        <button id="getcheckpoint4">CP4</button><br>
+        <button id="getcheckpoint5">CP5</button><br>
+        <button id="getcheckpoint6">CP6</button><br>
+        <button id="getcheckpoint7">CP7</button><br>
+    </div><br>
+    <div style="float: left; z-index: -1; display: block; color: white;">
+        <h3>W = Up</h3>
+        <h3>A = Left</h3>
+        <h3>D = Right</h3>
+        <h3>Space = Dash</h3>
+    </div>
+  </div>
+<div>
     <canvas></canvas>
     <div id="timer">
         <p id="minutes">00</p>
@@ -39,7 +57,7 @@
     <span id="dashbox">
         <h3 id="dash">dash</h3>
     </span>
-    </div>   
+</div>   
 
 </body>
 <script src="./js/util.js"></script>

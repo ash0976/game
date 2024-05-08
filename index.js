@@ -28,6 +28,80 @@ let cheackpoint7 = false
 
 var winaudio = new Audio ('sound/win.mp3')
 
+window.onload=getcheckpointload;
+
+function getcheckpointload() {
+    document.getElementById("getcheckpoint1").onclick=Fungetcheckpoint1;
+    document.getElementById("getcheckpoint2").onclick=Fungetcheckpoint2;
+    document.getElementById("getcheckpoint3").onclick=Fungetcheckpoint3;
+    document.getElementById("getcheckpoint4").onclick=Fungetcheckpoint4;
+    document.getElementById("getcheckpoint5").onclick=Fungetcheckpoint5;
+    document.getElementById("getcheckpoint6").onclick=Fungetcheckpoint6;
+    document.getElementById("getcheckpoint7").onclick=Fungetcheckpoint7;
+}
+function Fungetcheckpoint1() {
+    cheackpoint1 = true
+    cheackpoint2 = false
+    cheackpoint3 = false
+    cheackpoint4 = false
+    cheackpoint5 = false
+    cheackpoint6 = false
+    cheackpoint7 = false
+}
+function Fungetcheckpoint2() {
+    cheackpoint1 = false
+    cheackpoint2 = true
+    cheackpoint3 = false
+    cheackpoint4 = false
+    cheackpoint5 = false
+    cheackpoint6 = false
+    cheackpoint7 = false
+}
+function Fungetcheckpoint3() {
+    cheackpoint1 = false
+    cheackpoint2 = false
+    cheackpoint3 = true
+    cheackpoint4 = false
+    cheackpoint5 = false
+    cheackpoint6 = false
+    cheackpoint7 = false
+}
+function Fungetcheckpoint4() {
+    cheackpoint1 = false
+    cheackpoint2 = false
+    cheackpoint3 = false
+    cheackpoint4 = true
+    cheackpoint5 = false
+    cheackpoint6 = false
+    cheackpoint7 = false
+}
+function Fungetcheckpoint5() {
+    cheackpoint1 = false
+    cheackpoint2 = false
+    cheackpoint3 = false
+    cheackpoint4 = false
+    cheackpoint5 = true
+    cheackpoint6 = false
+    cheackpoint7 = false
+}
+function Fungetcheckpoint6() {
+    cheackpoint1 = false
+    cheackpoint2 = false
+    cheackpoint3 = false
+    cheackpoint4 = false
+    cheackpoint5 = false
+    cheackpoint6 = true
+    cheackpoint7 = false
+}
+function Fungetcheckpoint7() {
+    cheackpoint1 = false
+    cheackpoint2 = false
+    cheackpoint3 = false
+    cheackpoint4 = false
+    cheackpoint5 = false
+    cheackpoint6 = false
+    cheackpoint7 = true
+}
 //timer
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
@@ -682,8 +756,4 @@ setInterval(function(){
     console.log(camera.position.y)
     console.log(camera.position.x)
 }, 1000);
-
-
-
-
 
