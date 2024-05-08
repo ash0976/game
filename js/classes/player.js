@@ -1,10 +1,16 @@
-let alive = true;
-
 class Player extends Sprite {
     constructor({ 
         position, 
         CollisionsBlocks,
         spikeCollisionsBlocks,
+        winCollisionsBlocks,
+        cheackpointCollisionsBlocks,
+        cheackpoint2CollisionsBlocks,
+        cheackpoint3CollisionsBlocks,
+        cheackpoint4CollisionsBlocks,
+        cheackpoint5CollisionsBlocks,
+        cheackpoint6CollisionsBlocks,
+        cheackpoint7CollisionsBlocks,
         imageSrc, 
         framerate, 
         scale = 0.7, 
@@ -19,6 +25,14 @@ class Player extends Sprite {
         
         this.CollisionsBlocks = CollisionsBlocks
         this.spikeCollisionsBlocks = spikeCollisionsBlocks
+        this.winCollisionsBlocks = winCollisionsBlocks
+        this.cheackpointCollisionsBlocks = cheackpointCollisionsBlocks
+        this.cheackpoint2CollisionsBlocks = cheackpoint2CollisionsBlocks
+        this.cheackpoint3CollisionsBlocks = cheackpoint3CollisionsBlocks
+        this.cheackpoint4CollisionsBlocks = cheackpoint4CollisionsBlocks
+        this.cheackpoint5CollisionsBlocks = cheackpoint5CollisionsBlocks
+        this.cheackpoint6CollisionsBlocks = cheackpoint6CollisionsBlocks
+        this.cheackpoint7CollisionsBlocks = cheackpoint7CollisionsBlocks
         this.hitbox = {
             position: {
                 x:this.position.x, 
@@ -44,8 +58,8 @@ class Player extends Sprite {
                 x: this.position.x,
                 y: this.position.y,
             },
-            width: 250,
-            height: 200,
+            width: 450,
+            height: 270,
         }
     }
 
@@ -61,11 +75,11 @@ class Player extends Sprite {
     updatecamerabox(){
         this.camerabox = {
             position: {
-                x: this.position.x - 90,
-                y: this.position.y - 50,
+                x: this.position.x - 185,
+                y: this.position.y - 90,
             },
-            width: 250,
-            height: 200,
+            width: 450,
+            height: 270,
         }
     }
 
@@ -78,7 +92,7 @@ class Player extends Sprite {
 
     shouldPanCamraToTheLeft({canvas, camera}){
         const cameraboxRightSide = this.camerabox.position.x + this.camerabox.width
-        const scaledDownCanvasWidth = canvas.width / 2
+        const scaledDownCanvasWidth = canvas.width / 1.5
 
         if (cameraboxRightSide >= imgwidth) return
 
@@ -107,7 +121,7 @@ class Player extends Sprite {
     shouldPanCamraToTheUp({canvas, camera}){
         if (this.camerabox.position.y + this.camerabox.height + this.velocity.y >= imgheight) return
 
-        const scaledCanvasHeight = canvas.height / 2
+        const scaledCanvasHeight = canvas.height / 1.5
 
         if (this.camerabox.position.y + this.camerabox.height >= 
             Math.abs(camera.position.y) + scaledCanvasHeight){
@@ -125,11 +139,11 @@ class Player extends Sprite {
         //c.fillRect(this.camerabox.position.x, this.camerabox.position.y, this.camerabox.width, this.camerabox.height)
 
         //drawout image
-        /* c.fillStyle = 'rgba(0,255,0,0.2'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // c.fillStyle = 'rgba(0,255,0,0.2'
+        //c.fillRect(this.position.x, this.position.y, this.width, this.height)
 
-        c.fillStyle = 'rgba(255,0,0,0.2'
-        c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height) */
+        //c.fillStyle = 'rgba(255,0,0,0.2'
+        //c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height) 
 
         this.draw()
 
@@ -150,7 +164,7 @@ class Player extends Sprite {
                 x: this.position.x + 26.5, 
                 y: this.position.y + 31,
             },
-            width: 16,
+            width: 15,
             height: 36.5
         }
 
@@ -189,8 +203,9 @@ class Player extends Sprite {
     }
 
     applyGravity(){
+        if (gravity < 0.6){
         this.velocity.y += gravity
-        this.position.y += this.velocity.y
+        this.position.y += this.velocity.y}
     }
 
     checkForVerticalCollision(){
@@ -222,7 +237,7 @@ class Player extends Sprite {
 
         }
 
-         //platform collision block
+         //spike collision block
          for (let i = 0; i < this.spikeCollisionsBlocks.length; i++) {
             const spikeCollisionsBlock = this.spikeCollisionsBlocks[i]
 
@@ -232,9 +247,35 @@ class Player extends Sprite {
                     object2: spikeCollisionsBlock,
                 })
             ){
-                if(this.velocity.y > 0){
+                if(this.velocity.y !== 0 || this.velocity.x !== 0){
 
                     alive = false;
+
+                    this.velocity.y = 0;
+                    
+                    this.velocity.x = 0;
+
+                }
+                if(this.velocity.y < 0){ 
+                    
+                   
+                }
+            }
+
+        }
+        //win collision block
+        for (let i = 0; i < this.winCollisionsBlocks.length; i++) {
+            const winCollisionsBlock = this.winCollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: winCollisionsBlock,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+
+                    win = true;
 
                     this.velocity.y = 0;
                     
@@ -248,27 +289,163 @@ class Player extends Sprite {
             }
 
         }
-    }
+        for (let i = 0; i < this.cheackpointCollisionsBlocks.length; i++) {
+            const cheackpointCollisionsBlocks = this.cheackpointCollisionsBlocks[i]
 
-    //platform collision block
-    for () {
-        
             if(
-            paltformcollision({
-                object1: this.hitbox,
-                object2: slime.hitbox,
-            })
-        ){
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpointCollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint1 = true
+                    
 
-
-               console.log("hit")
-
-                this.velocity.y = 0;
-                
-                this.velocity.x = 0;
-
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
             }
-        }
 
+        }
+        for (let i = 0; i < this.cheackpoint2CollisionsBlocks.length; i++) {
+            const cheackpoint2CollisionsBlocks = this.cheackpoint2CollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpoint2CollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint2 = true
+                    cheackpoint1 = false
+                    
+
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
+            }
+
+        }
+         for (let i = 0; i < this.cheackpoint3CollisionsBlocks.length; i++) {
+            const cheackpoint3CollisionsBlocks = this.cheackpoint3CollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpoint3CollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint3 = true
+                    cheackpoint2 = false
+                    
+
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
+            }
+
+        }
+        for (let i = 0; i < this.cheackpoint4CollisionsBlocks.length; i++) {
+            const cheackpoint4CollisionsBlocks = this.cheackpoint4CollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpoint4CollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint4 = true
+                    cheackpoint3 = false
+                    
+
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
+            }
+
+        }
+        for (let i = 0; i < this.cheackpoint5CollisionsBlocks.length; i++) {
+            const cheackpoint5CollisionsBlocks = this.cheackpoint5CollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpoint5CollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint5 = true
+                    cheackpoint4 = false
+                    
+
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
+            }
+
+        }
+        for (let i = 0; i < this.cheackpoint6CollisionsBlocks.length; i++) {
+            const cheackpoint6CollisionsBlocks = this.cheackpoint6CollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpoint6CollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint6 = true
+                    cheackpoint5 = false
+                    
+
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
+            }
+
+        }
+         for (let i = 0; i < this.cheackpoint7CollisionsBlocks.length; i++) {
+            const cheackpoint7CollisionsBlocks = this.cheackpoint7CollisionsBlocks[i]
+
+            if(
+                paltformcollision({
+                    object1: this.hitbox,
+                    object2: cheackpoint7CollisionsBlocks,
+                })
+            ){
+                if(this.velocity.y > 0 || this.velocity.x > 0){
+                    cheackpoint7 = true
+                    cheackpoint6 = false
+                    
+
+                }
+                if(this.velocity.y < 0){
+                    
+                   
+                }
+            }
+
+        }  
     }
 
+}
+    
+
+
+         

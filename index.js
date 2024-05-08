@@ -9,10 +9,25 @@ var jump = 0;
 let dashCooldown = 0;
 let dashtime = 0;
 
-let imgwidth = 1088;
-let imgheight = 960;
+let imgwidth = 8192;
+let imgheight = 8192;
 
+let alive = true;
 let deathcounter = 0;
+
+let win = false;
+let winner = 0;
+
+let cheackpoint1 = false
+let cheackpoint2 = false
+let cheackpoint3 = false
+let cheackpoint4 = false
+let cheackpoint5 = false
+let cheackpoint6 = false
+let cheackpoint7 = false
+
+var winaudio = new Audio ('sound/win.mp3')
+
 //timer
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
@@ -21,9 +36,16 @@ setInterval(setTime, 1000);
 
 function setTime()
 {
-    ++totalSeconds;
+    if (alive === true){
+        if (win === false){
+     ++totalSeconds;
     secondsLabel.innerHTML = pad(totalSeconds%60);
     minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+        }
+    }
+    else{
+        return
+    }
 }
 
 function pad(val)
@@ -37,6 +59,7 @@ function pad(val)
     {
         return valString;
     }
+    
 }
 
 
@@ -44,21 +67,28 @@ function respawnbox(){
     document.getElementById("respawn").style.display="flex"
 }
 
+function winbox(){
+    document.getElementById("win").style.display="flex"
+    winaudio.play();
+    document.getElementById("winsecond").innerHTML = pad(totalSeconds%60);
+    document.getElementById("winminutes").innerHTML = pad(parseInt(totalSeconds/60));
+    document.getElementById("timedeaths").innerHTML = deathcounter;
+}
+
 const scaledcanvas = {
-    width: canvas.width / 2,
-    height: canvas.height / 2
+    width: canvas.width / 1.5,
+    height: canvas.height / 1.5
 }
 
 const floorCollisions2d = []
-for(let i = 0; i < floorCollisions.length; i += 34) {
-    floorCollisions2d.push(floorCollisions.slice(i, i + 34))
+for(let i = 0; i < floorCollisions.length; i += 256) {
+    floorCollisions2d.push(floorCollisions.slice(i, i + 256))
 }
 
 const CollisionsBlocks = []
 floorCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
-        if(Symbol === 202) {
-            console.log('draw a block')
+        if(Symbol === 1) {
             CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -70,18 +100,38 @@ floorCollisions2d.forEach((row, y) => {
         }
     })
 })
-
+console.log(floorCollisions2d)
 const spikeCollisions2d = []
-for(let i = 0; i < SpikeCollisions.length; i += 36) {
-    spikeCollisions2d.push(SpikeCollisions.slice(i, i + 36))
+for(let i = 0; i < SpikeCollisions.length; i += 256) {
+    spikeCollisions2d.push(SpikeCollisions.slice(i, i + 256))
 }
 
 const spikeCollisionsBlocks = []
 spikeCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
-        if(Symbol === 203) {
-            console.log('draw a block')
+        if(Symbol === 193) {
             spikeCollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                })
+            )
+        }
+    })
+})
+
+const winCollisions2d = []
+for(let i = 0; i < winCollisions.length; i += 256) {
+    winCollisions2d.push(winCollisions.slice(i, i + 256))
+}
+
+const winCollisionsBlocks = []
+winCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 161) {
+            winCollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
                         x: x * 32,
@@ -94,7 +144,140 @@ spikeCollisions2d.forEach((row, y) => {
     })
 })
 
-console.log(spikeCollisions2d)
+const cheackpointCollisions2d = []
+for(let i = 0; i < cheackpointCollisions.length; i += 256) {
+    cheackpointCollisions2d.push(cheackpointCollisions.slice(i, i + 256))
+}
+
+const cheackpointCollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 321) {
+            console.log(cheackpointCollisionsBlocks)
+            cheackpointCollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+                
+            )
+        }
+    })
+})
+
+
+const cheackpoint2CollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 322) {
+            console.log(cheackpoint2CollisionsBlocks)
+            cheackpoint2CollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+            )
+        }
+    })
+})
+
+const cheackpoint3CollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 323) {
+            console.log(cheackpoint3CollisionsBlocks)
+            cheackpoint3CollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+            )
+        }
+    })
+})
+
+const cheackpoint4CollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 324) {
+            console.log(cheackpoint4CollisionsBlocks)
+            cheackpoint4CollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+            )
+        }
+    })
+})
+
+const cheackpoint5CollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 353) {
+            console.log(cheackpoint5CollisionsBlocks)
+            cheackpoint5CollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+            )
+        }
+    })
+})
+
+const cheackpoint6CollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 354) {
+            console.log(cheackpoint6CollisionsBlocks)
+            cheackpoint6CollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+            )
+        }
+    })
+})
+const cheackpoint7CollisionsBlocks = []
+cheackpointCollisions2d.forEach((row, y) => {
+    row.forEach((Symbol, x) => {
+        if(Symbol === 355) {
+            console.log(cheackpoint7CollisionsBlocks)
+            cheackpoint7CollisionsBlocks.push(
+                new CollisionsBlock({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                    
+                })
+            )
+        }
+    })
+})
+console.log(winCollisionsBlocks)
+
+
 
 
 const gravity = 0.315 ;
@@ -102,11 +285,19 @@ const gravity = 0.315 ;
 
 const player = new Player({
     position: {
-    x: 100,
-    y: 840,
+    x: 300,
+    y: 7040,
     },
     CollisionsBlocks,
     spikeCollisionsBlocks,
+    winCollisionsBlocks,
+    cheackpointCollisionsBlocks,
+    cheackpoint2CollisionsBlocks,
+    cheackpoint3CollisionsBlocks,
+    cheackpoint4CollisionsBlocks,
+    cheackpoint5CollisionsBlocks,
+    cheackpoint6CollisionsBlocks,
+    cheackpoint7CollisionsBlocks,
     imageSrc: 'img/pc/idle.png',
     framerate: 8,
     animations: {
@@ -174,12 +365,12 @@ const background = new Sprite({
     imageSrc: './img/Background.png',
 })
 
-const backgroundimageheight = 960;
+const backgroundimageheight = 8192;
 
 const camera = {
     position: {
         x: 0,
-        y: -imgwidth + scaledcanvas.height + 130,
+        y: -imgwidth + scaledcanvas.height +100,
     },
 }
 
@@ -189,13 +380,37 @@ function animate(){
     c.fillRect(0,0,canvas.width,canvas.height)
 
     c.save()
-    c.scale (2, 2)
+    c.scale (1.5, 1.5)
     c.translate(camera.position.x, camera.position.y) 
     background.update()
     CollisionsBlocks.forEach((CollisionsBlock) => {
         CollisionsBlock.update()
     })
     spikeCollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    winCollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpointCollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpoint2CollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpoint3CollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpoint4CollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpoint5CollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpoint6CollisionsBlocks.forEach((CollisionsBlock) => {
+        CollisionsBlock.update()
+    })
+    cheackpoint7CollisionsBlocks.forEach((CollisionsBlock) => {
         CollisionsBlock.update()
     })
     player.checkForHorizontalCanvasCollision()
@@ -208,6 +423,18 @@ function animate(){
         keys.Shift.pressed = false
         respawnbox()
     }
+
+    if (win === true){
+        keys.d.pressed = false
+        keys.a.pressed = false
+        keys.Shift.pressed = false
+        if(winner == 0){
+        winner ++
+        winbox()}
+
+    }
+
+    
 
     player.velocity.x = 0
     if (keys.d.pressed) {
@@ -241,7 +468,7 @@ function animate(){
         if (keys.Shift.pressed) {
             if (player.lastDiraction === 'right')
             {
-            player.velocity.x = 15
+            player.velocity.x = 13
             player.shouldPanCamraToTheLeft({canvas, camera}),
             setTimeout(() => {
                 keys.Shift.pressed = false;
@@ -249,19 +476,25 @@ function animate(){
             }
             if (player.lastDiraction === 'left')
             {
-            player.velocity.x = -7
+            player.velocity.x = -13
             player.shouldPanCamraToTheRight({canvas, camera}),
             setTimeout(() => {
                 keys.Shift.pressed = false;
-              }, 200);
+              }, 100);
             }
         }
     
 
     c.restore()
 
-    
-    
+    setInterval(function(){
+        if(dashCooldown > 0){
+            document.getElementById('dash').innerHTML = dashCooldown;
+        }
+        else if (dashCooldown == 0) {
+            document.getElementById('dash').innerHTML = "dash";
+        }
+    }, 1000);
 
 }
 
@@ -270,15 +503,87 @@ animate()
 
 
 function respawn(){
-    alive = true;
-    player.position.x = 100;
-    player.position.y = 850;
-    camera.position.x =0;
-    camera.position.y = -imgwidth + scaledcanvas.height + 130
+    if(cheackpoint1 == true){
+        alive = true;
+    player.position.x = 3800;
+    player.position.y = 6784;
+    camera.position.x =-3461;
+    camera.position.y = -imgwidth + scaledcanvas.height + 1250
     document.getElementById("respawn").style.display="none"
     deathcounter ++
     document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else if (cheackpoint2 == true) {
+        alive = true;
+    player.position.x = 5870;
+    player.position.y = 5056;
+    camera.position.x =-5586;
+    camera.position.y = -4865
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else if (cheackpoint3 == true) {
+        alive = true;
+    player.position.x = 1500;
+    player.position.y = 5820;
+    camera.position.x =-1209;
+    camera.position.y = -imgwidth + scaledcanvas.height + 2200
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else if (cheackpoint4 == true) {
+        alive = true;
+    player.position.x = 3384;
+    player.position.y = 4768;
+    camera.position.x =-2994;
+    camera.position.y = -4535
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else if (cheackpoint5 == true) {
+        alive = true;
+    player.position.x = 7880;
+    player.position.y = 7968;
+    camera.position.x =-7509;
+    camera.position.y = -7731
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else if (cheackpoint6 == true) {
+        alive = true;
+    player.position.x = 2464;
+    player.position.y = 3290;
+    camera.position.x =-2130;
+    camera.position.y = -3133;
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else if (cheackpoint7 == true) {
+        alive = true;
+    player.position.x = 5760;
+    player.position.y = 2400;
+    camera.position.x =-5373;
+    camera.position.y = -2157;
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter
+    }
+    else {
+    alive = true;
+    player.position.x = 300;
+    player.position.y = 7040;
+    camera.position.x =0;
+    camera.position.y = -imgwidth + scaledcanvas.height + 100
+    document.getElementById("respawn").style.display="none"
+    deathcounter ++
+    document.getElementById('death').innerHTML = "death: "+deathcounter}
 }
+
 
 
 
@@ -296,11 +601,11 @@ window.addEventListener('keydown', (event) => {
     }
     switch (event.key) {
         case 'w':
-            if(jump < 1 && alive === true){
+            if(jump < 1 && alive === true && win === false){
             player.velocity.y = -7.25;
             jump ++;
             }
-            else if(jump == 1  && alive === true){
+            else if(jump == 1  && alive === true && win === false){
             player.velocity.y = -6.5;
             jump ++;
             }
@@ -319,11 +624,11 @@ window.addEventListener('keydown', (event) => {
     }
     switch (event.key) {
         case 'W':
-            if(jump < 1  && alive === true){
+            if(jump < 1  && alive === true && win === false){
             player.velocity.y = -7.25;
             jump ++;
             }
-            else if(jump == 1  && alive === true){
+            else if(jump == 1  && alive === true && win === false){
             player.velocity.y = -6.5;
             jump ++;
             }
@@ -339,8 +644,10 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case ' ':
             if (dashCooldown == 0){
+                dashCooldown = 4
                 keys.Shift.pressed = true
-                dashCooldown = 8}
+                dashtime = 1
+                }
         break
         }
 
@@ -371,12 +678,12 @@ window.addEventListener('keyup', (event) => {
 setInterval(function(){
     if (dashCooldown > 0){
     dashCooldown = dashCooldown - 1;
-    dashtime = 1;
-    console.log(dashCooldown)
-    
-    
     }
-    console.log(alive)
-    console.log(deathcounter)
-}, 500);
+    console.log(camera.position.y)
+    console.log(camera.position.x)
+}, 1000);
+
+
+
+
 

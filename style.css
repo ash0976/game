@@ -3,6 +3,9 @@ body{
     text-align: center;
     position: relative;
 }
+canvas{
+    background: black;
+}
 #respawn{
     border-style: solid;
     display: none;
@@ -71,4 +74,81 @@ p{
     color:white;
     text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
 
+}
+#win{
+    border-style: solid;
+    display: none;
+    background-image: url(img/truehero.png);
+    width: 600px;
+    height: 250px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 170px;
+    text-align: center;
+}
+h1{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8%;
+    color: rgb(238, 188, 81);
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+
+}
+#winminutes{
+    display: inline;
+}
+#wincolon{
+    display: inline;
+}
+#winsecond{
+    display: inline;
+}
+#time{
+    display: inline;
+}
+#wintimer{
+    position: absolute;
+    margin-right: 140px;
+    margin-left: 30%;
+    margin-top: 15%;
+}
+#windeaths{
+    position: absolute;
+    margin-right: 140px;
+    margin-left: 57%;
+    margin-top: 15%;
+}
+#deaths{
+    display: inline;
+}
+#timedeaths{
+    display: inline;
+    display: inline;
+    position: absolute;
+    top: -16px;
+    right: -19px;
+}
+#restart{
+    display: block;
+    height: 30px;
+    position: absolute;
+    right: 45%;
+    top: 120px;
+    background-color: rgb(144, 253, 253);
+}
+#dash{
+    display: inline;
+    color: white;
+    
+}
+#dashbox{
+    display: inline;
+    display: inline;
+    position: absolute;
+    top: 525px;
+    right: 50%;
 }

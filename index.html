@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Document</title>
+    <title>Wizard's Peak: Spellbound Ascent</title>
 </head>
 <body>
     <div>
@@ -22,6 +22,23 @@
         <button id="yes" onclick="respawn()">yes</button>
         <button id="no" onclick="window.close();">no</button>
     </div>
+    <div id="win"> 
+        <h1>you win</h1>
+    <span id="wintimer">
+        <p id="time">time:</p>
+        <p id="winminutes"></p>
+        <p id="wincolon">:</p>
+        <p id="winsecond"></p>
+    </span>
+    <span id="windeaths">
+        <p id="deaths">deaths:</p>
+        <p id="timedeaths">10</p>
+    </span>
+    <button id="restart" onclick="location.reload();">restart?</button>
+    </div>
+    <span id="dashbox">
+        <h3 id="dash">dash</h3>
+    </span>
     </div>   
 
 </body>
