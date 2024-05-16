@@ -227,7 +227,6 @@ const cheackpointCollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 321) {
-            console.log(cheackpointCollisionsBlocks)
             cheackpointCollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -247,7 +246,6 @@ const cheackpoint2CollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 322) {
-            console.log(cheackpoint2CollisionsBlocks)
             cheackpoint2CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -265,7 +263,6 @@ const cheackpoint3CollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 323) {
-            console.log(cheackpoint3CollisionsBlocks)
             cheackpoint3CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -283,7 +280,6 @@ const cheackpoint4CollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 324) {
-            console.log(cheackpoint4CollisionsBlocks)
             cheackpoint4CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -301,7 +297,6 @@ const cheackpoint5CollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 353) {
-            console.log(cheackpoint5CollisionsBlocks)
             cheackpoint5CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -319,7 +314,6 @@ const cheackpoint6CollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 354) {
-            console.log(cheackpoint6CollisionsBlocks)
             cheackpoint6CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -336,7 +330,6 @@ const cheackpoint7CollisionsBlocks = []
 cheackpointCollisions2d.forEach((row, y) => {
     row.forEach((Symbol, x) => {
         if(Symbol === 355) {
-            console.log(cheackpoint7CollisionsBlocks)
             cheackpoint7CollisionsBlocks.push(
                 new CollisionsBlock({
                     position: {
@@ -349,7 +342,6 @@ cheackpointCollisions2d.forEach((row, y) => {
         }
     })
 })
-console.log(winCollisionsBlocks)
 
 
 
@@ -555,7 +547,11 @@ function animate(){
             setTimeout(() => {
                 keys.Shift.pressed = false;
               }, 100);
+
             }
+        setTimeout(() => {
+            keys.Shift.pressed = false;
+        },100);
         }
     
 
@@ -753,7 +749,5 @@ setInterval(function(){
     if (dashCooldown > 0){
     dashCooldown = dashCooldown - 1;
     }
-    console.log(camera.position.y)
-    console.log(camera.position.x)
 }, 1000);
 

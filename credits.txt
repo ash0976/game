@@ -1,0 +1,53 @@
+Credits
+
+
+Character Movement:
+Timmy Nikolai Jeremiassen
+
+Camera Movement/Placement:
+Timmy Nikolai Jeremiassen
+
+Dash:
+Timmy Nikolai Jeremiassen
+
+Collision:
+Timmy Nikolai Jeremiassen
+
+Death:
+Timmy Nikolai Jeremiassen
+
+Checkpoint:
+Timmy Nikolai Jeremiassen
+
+Win Screen:
+Timmy Nikolai Jeremiassen
+
+
+
+
+Level Graphics:
+Nathanael Rytter-Johansen
+
+Level Design:
+Nathanael Rytter-Johansen
+
+Character Animation frames:
+Nathanael Rytter-Johansen
+
+Game Logo:
+Nathanael Rytter-Johansen
+
+Admin controlls:
+Nathanael Rytter-Johansen
+
+
+
+
+Alpha/Beta Tester: 
+Gabriel Dyrdal Lohmer
+
+
+
+
+
+

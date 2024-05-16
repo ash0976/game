@@ -344,6 +344,7 @@ class Player extends Sprite {
                 if(this.velocity.y > 0 || this.velocity.x > 0){
                     cheackpoint3 = true
                     cheackpoint2 = false
+                    cheackpoint1 = false
                     
 
                 }
@@ -366,6 +367,8 @@ class Player extends Sprite {
                 if(this.velocity.y > 0 || this.velocity.x > 0){
                     cheackpoint4 = true
                     cheackpoint3 = false
+                    cheackpoint2 = false
+                    cheackpoint1 = false
                     
 
                 }
@@ -388,6 +391,9 @@ class Player extends Sprite {
                 if(this.velocity.y > 0 || this.velocity.x > 0){
                     cheackpoint5 = true
                     cheackpoint4 = false
+                    cheackpoint3 = false
+                    cheackpoint2 = false
+                    cheackpoint1 = false
                     
 
                 }
@@ -410,6 +416,10 @@ class Player extends Sprite {
                 if(this.velocity.y > 0 || this.velocity.x > 0){
                     cheackpoint6 = true
                     cheackpoint5 = false
+                    cheackpoint4 = false
+                    cheackpoint3 = false
+                    cheackpoint2 = false
+                    cheackpoint1 = false
                     
 
                 }
@@ -432,6 +442,11 @@ class Player extends Sprite {
                 if(this.velocity.y > 0 || this.velocity.x > 0){
                     cheackpoint7 = true
                     cheackpoint6 = false
+                    cheackpoint5 = false
+                    cheackpoint4 = false
+                    cheackpoint3 = false
+                    cheackpoint2 = false
+                    cheackpoint1 = false
                     
 
                 }
